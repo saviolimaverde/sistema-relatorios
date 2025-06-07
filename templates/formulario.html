@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório Processual</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { text-align: center; }
+        label { display: block; margin-top: 10px; }
+        input[type="text"] { width: 100%%; padding: 8px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Relatório Processual</h1>
+    {% if not processos %}
+    <form method="POST">
+        <label>Cliente:</label>
+        <input type="text" name="cliente" required>
+
+        <label>Referência (mês/ano):</label>
+        <input type="text" name="referencia" placeholder="Ex: Junho/2025" required>
+
+        <label>Processo e andamento:</label>
+        <div id="processos">
+            <input type="text" name="processo" placeholder="Número do processo" required>
+            <input type="text" name="andamento" placeholder="Andamento atual" required>
+        </div>
+
+        <button type="submit">Gerar Relatório</button>
+    </form>
+    {% else %}
+    <p><strong>Cliente:</strong> {{ cliente }}</p>
+    <p><strong>Referência:</strong> {{ referencia }}</p>
+    <p><strong>Data de emissão:</strong> {{ data_atual }}</p>
+    <hr>
+    {% for proc, andam in processos %}
+        <p><strong>Processo:</strong> {{ proc }}</p>
+        <p><strong>Andamento:</strong> {{ andam }}</p>
+        <hr>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
